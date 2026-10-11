@@ -1,0 +1,15 @@
+CO TUONG - WEBSITE NETLIFY, DONG HO 2 BEN
+
+Trien khai: tai ZIP len Netlify Deploys (neu can, giai nen va keo tha toan bo noi dung).
+Headers _headers phai nam cung cap voi index.html.
+
+Thoi gian mac dinh: 60 phut + 30 giay moi nuoc moi ben, theo dieu le Giai Vo dich Co tuong The gioi WXF 2025.
+Nguon: https://www.wxf-xiangqi.org/images/2025wxf_shanghai/19th_WXF__World_Xiangqi_Championship_Regulations.pdf
+Thoi gian 40+15, 15+10, 10+5, 5+3 la cac lua chon nhanh hon; khong mac nhien la chuan thi dau cua moi giai.
+
+Bam Bat dau dong ho hoac cham vao quan de khoi dong. Nguoi choi den luot bi tru thoi gian, sau nuoc hop le duoc cong increment. Het gio xu thua. Tam dung chi danh cho choi/luyen tap; thi dau chinh thuc phai dung quy trinh trong tai, khong cho tu tam dung.
+
+Luu van: con lai moi ben va che do thoi gian duoc luu vao du lieu trinh duyet.
+
+DA XAC MINH: node --check script, ZIP integrity, presence Pikafish assets, clock HTML controls.
+CHUA XAC MINH: toc do va hanh vi dong ho tren dien thoai that, Pikafish bestmove tren Netlify, toan bo 50 van de trong bao cao truoc.
