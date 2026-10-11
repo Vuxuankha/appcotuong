@@ -1,0 +1,7 @@
+CO TUONG AI - MUC 7 SIEU DAI KIEN TUONG
+1. Trien khai toan bo thu muc appcotuong len web host HTTPS ho tro SharedArrayBuffer va COOP/COEP.
+2. Mo website, nhan Nap Pikafish va Kiem tra AI; chi tiep tuc khi AI xac nhan phan tich thanh cong.
+3. Bat Dau voi may, chon Muc 7 - Sieu dai kien tuong.
+4. Muc 7 dung Pikafish depth 24 va KHONG su dung AI JavaScript du phong.
+5. Neu engine khong nap duoc, luot may tam dung va app se bao loi. Khong dam bao AI bat bai.
+Luu y: depth 24 co the cham tren dien thoai va bi gioi han boi timeout/hieu nang thiet bi.

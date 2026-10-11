@@ -1,0 +1,12 @@
+CO TUONG AI - PHIEN BAN DIEN THOAI
+
+CACH 1 - CHOI NGAY KHONG CAN MAY CHU:
+Tai co_tuong_dien_thoai.html ve may, mo bang Chrome/Edge (Android) hoac Safari (iPhone neu trinh duyet ho tro mo HTML tai ve).
+AI JavaScript, 1006 the co, cham diem tham khao va luu van trong trinh duyet.
+Pikafish KHONG hoat dong khi mo truc tiep file HTML.
+
+CACH 2 - MUON PIKAFISH TREN DIEN THOAI:
+Tai toan bo thu muc appcotuong len hosting HTTPS cho phep cau hinh COOP: same-origin va COEP: require-corp. Truy cap ten mien tren dien thoai. Khong phai dien thoai nao cung ho tro SharedArrayBuffer va WASM pthread, net ~50 MB can RAM lon. Khi that bai dung AI JS du phong.
+
+Khong can nhap FEN hay JSON. Khong can cai Node.js tren dien thoai.
+Luu van la localStorage va phu thuoc trinh duyet + ten mien, khong tu dong dong bo sang thiet bi khac.

@@ -1,0 +1,9 @@
+CO TUONG AI - 10 CAP DO (11/10/2026)
+Cap 1-6: theo ban cu. Cap 7: Pikafish depth 24.
+Cap 8: Pikafish thoi gian nghi 7s (uu tien suc manh 18s).
+Cap 9: Pikafish 12s (uu tien suc manh 30s).
+Cap 10: Pikafish 20s (uu tien suc manh 50s).
+Cap 7-10 yeu cau Pikafish duoc nap thanh cong. Khong tu thay bang AI JavaScript.
+Tren dien thoai can website HTTPS co COOP/COEP. Tren Windows co the chay CHAY_APP.bat.
+Do sau 28/32/36 la muc tieu tham khao; cac muc 8-10 duoc gioi han theo thoi gian, khong cam ket dat do sau do.
+Da kiem tra cu phap JavaScript va Node. Chua kiem thu engine/Pikafish tren dien thoai that.
