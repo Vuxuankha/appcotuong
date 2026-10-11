@@ -70,6 +70,6 @@ self.addEventListener('message', async (event) => {
       self.postMessage({ type: 'error', error: 'Pikafish worker is not ready' });
       return;
     }
-    command(message.command);
+    try { command(message.command); } catch (error) { self.postMessage({type:'error',error:String(error?.message||error)}); }
   }
 });

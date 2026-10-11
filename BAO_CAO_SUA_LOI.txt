@@ -1,0 +1,11 @@
+BẢN CẬP NHẬT KIỂM TRA 11/10/2026
+Nguồn: co_tuong_ai_da_sua_full.zip
+Đã chỉnh mã: hủy yêu cầu UCI trong hàng chờ khi đổi ván; không dùng mặc định score=0 khi thiếu điểm; đánh giá nước kết thúc ván; sửa minimax khi hết nước; chặn tác vụ gợi ý chồng nhau; chặn thao tác hủy ván không xác nhận; lưu tối đa 30 ván; chọn ván đã lưu; khôi phục botMode và dấu nước đi sau nhập; xử lý phương án luyện khác nước gợi ý; bổ sung bảo vệ nhập biên bản.
+Các vấn đề CÒN CHƯA XÁC MINH / CHƯA GIẢI QUYẾT HOÀN TOÀN:
+- Chưa kiểm thử đầy đủ Pikafish phân tích thực tế thông qua Chromium trên Windows.
+- Chưa có thuật toán xử lý luật chiếu liên tục/lặp thế theo mọi trường hợp của luật cờ tướng.
+- Phân tích chuỗi biến hóa chiến thuật nhiều nước, điểm mate theo số nước và đánh giá chính xác mọi nước máy vẫn hạn chế.
+- AI JavaScript dự phòng vẫn tính trên luồng giao diện, có thể chậm với cấu hình thấp.
+- Kiểm tra checksum tự động worker.js chưa bổ sung vì cần nguồn chuẩn để xác minh.
+- Phần giải thích thắng/thua còn mang tính tham khảo, không phải kết luận bằng chứng minh chiến thuật.
+Kiểm tra đã thực hiện: node --check (JS app, server.js, worker.js), kiểm tra ZIP, kiểm tra tệp nhị phân, HTTP smoke test nếu khả dụng.
