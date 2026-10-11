@@ -1,0 +1,7 @@
+THU VIEN THE CO - BAN KHONG NHAP DU LIEU
+- Chon bai tap co san va nhan Nap the co.
+- Nhan Tao the luyen tu dong de sinh mot the co tu chuoi nuoc di hop le.
+- AI se nhan dien dau hieu khai cuoc, chieu tuong, co hoi an quan va tan cuoc.
+- Khong co o nhap FEN, khong them/xoa the co bang tay, khong xuat/nhap JSON.
+- Luu va mo van choi tren may tinh van duoc giu lai.
+- The ngau nhien khong duoc bao dam co loi giai duy nhat; Pikafish duoc dung khi nap thanh cong.

@@ -1,0 +1,6 @@
+THU VIEN 1000 THE CO (11/10/2026)
+- 1000 the co khac nhau duoc tao tu chuoi nuoc di hop le cua bo luat trong ung dung.
+- 6 the co mau cu duoc giu lai. Tong cong 1006 vi tri trong danh sach.
+- Du lieu o tep positions1000.js va duoc tai tu dong. Khong can nhap FEN/JSON.
+- Chon nhom -> chon the co -> Nap the co. Co the phan tich voi AI nhu cac the khac.
+- Cac the moi KHONG duoc xac minh la bai toan chieu bi/loi giai duoc Pikafish chung thuc; la cac vi tri luyen chien thuat tong quat.
