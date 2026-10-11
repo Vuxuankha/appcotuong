@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: co-tuong-pikafish-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: THREADS
+        value: "1"
+      - key: HASH_MB
+        value: "24"
+      - key: MAX_ACTIVE
+        value: "1"
