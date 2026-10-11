@@ -1,0 +1,11 @@
+CO TUONG AI - BAN NANG CAP TONG HOP
+
+1. Giai nen vao thu muc rieng.
+2. Cai Node.js LTS neu may chua co.
+3. Nhap dup CHAY_APP.bat de khoi dong dia chi localhost cong ngau nhien, tranh mo nham ung dung.
+4. Choi bang AI JavaScript khi chua cai engine Pikafish.
+5. Neu co bo Pikafish WASM tuong thich, chay CAI_ENGINE.bat va nhan Nap Pikafish. Khong bao dam bo tai engine tai ve thanh cong vi phu thuoc nguon GitHub.
+6. Cac nut moi: Phat lai (Nuoc truoc/Nuoc sau), Luu van, Xuat JSON, Nhap JSON, Luyen nuoc sai.
+7. Nuoc di phai duoc hoan tat khi bot dang nghi; neu dang xem lai hay nhan Tro lai van.
+8. Phan tich/diem JS la uoc luong, KHONG thay cho engine Pikafish. Luat chieu lien tuc va lap the phuc tap chua duoc giam dinh day du.
+9. Chi nhap tep JSON do ung dung nay tao va co nguon tin cay.

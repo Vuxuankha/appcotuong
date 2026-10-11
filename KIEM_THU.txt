@@ -1,0 +1,24 @@
+CO TUONG AI - KIEM THU VA TINH TRANG (11/10/2026)
+
+DA XAC NHAN:
+- HTML/JavaScript: node --check thanh cong.
+- server.js: node --check thanh cong.
+- Node server thuc te khoi dong va cap phat cong localhost ngau nhien.
+- Ma co nut Luu van va MO VAN DA LUU, goi loadGame va validateLoad.
+- Khi nap Pikafish, app kiem tra su hien dien cua 4 tep: worker.js, pikafish.js, pikafish.wasm, pikafish.nnue.
+- Che do du phong AI JavaScript van co trong ung dung.
+
+CHUA XAC NHAN:
+- Chromium end-to-end: lan chay tu dong bi timeout (khong tinh la PASS).
+- Pikafish UCI/WASM thuc te: 4 tep chua tai duoc vi may tao goi khong ket noi duoc github.com.
+- Doi thu AI, cham diem Pikafish, luat chieu lien tuc/lap the va cac thao tac day du: chua test E2E.
+
+HUONG DAN:
+1. Giai nen zip, cai Node.js LTS.
+2. Chay CAI_ENGINE.bat voi ket noi GitHub de tai Pikafish (PowerShell can cho phep script).
+3. Chay CHAY_APP.bat, app tu chon cong localhost.
+4. Trong giao dien bam Nap Pikafish, sau do Kiem tra AI. Neu fail, app se bao tep thieu.
+5. Neu chua cai engine, dung AI JS (AI tham khao).
+
+THAM KHAO: https://github.com/brianhliou/pikafish-wasm
+Luu y giay phep GPL-3.0-or-later va NNUE co gioi han su dung thuong mai.
