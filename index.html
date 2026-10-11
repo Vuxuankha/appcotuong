@@ -48,7 +48,7 @@ function engineQuery(history=[],forBot=false) {
    if(!pikaReady||!pikaWorker) return reject(Error('Pikafish chưa sẵn sàng'));
    const ticket={resolve,reject,score:null,bestmove:null,timer:null};
    pikaPending=ticket;
-   ticket.timer=setTimeout(()=>{if(pikaPending===ticket){pikaPending=null;reject(Error('Pikafish quá thời gian phân tích'));try{pikaWorker.postMessage({type:'command',command:'stop'})}catch(_){}}},65000);
+   ticket.timer=setTimeout(()=>{if(pikaPending===ticket){stopPika('Pikafish quá thời gian phân tích; đã khởi động lại kết nối để tránh nhận nhầm bestmove cũ');reject(Error('Pikafish quá thời gian phân tích'));}}, Math.max(65000, (forBot && botDifficulty()>=8 ? (document.getElementById('strengthMode').value==='power'?({8:18000,9:30000,10:50000}[botDifficulty()]):({8:7000,9:12000,10:20000}[botDifficulty()])):0)+18000));
    let commands=[(techStartFen?'position fen '+techStartFen:'position startpos')+(history.length?' moves '+history.join(' '):''),(forBot && botDifficulty()>=8 ? 'go movetime '+(document.getElementById('strengthMode').value==='power' ? ({8:18000,9:30000,10:50000}[botDifficulty()]) : ({8:7000,9:12000,10:20000}[botDifficulty()])) : 'go depth '+ (forBot ? botDepth() : (+document.getElementById('depth').value===1?8:+document.getElementById('depth').value===2?12:16)))];
    for(let command of commands)pikaWorker.postMessage({type:'command',command});
  }));
@@ -76,7 +76,7 @@ function onPikaLine(line){
 async function loadPika(){
  stopPika('Khởi động lại');engineOnline=false;
  if(location.protocol==='file:'){setAIStatus('🟠 Chưa nạp Pikafish','Mở file HTML trực tiếp (file://) không hỗ trợ worker WASM đa luồng. Cần đưa thư mục lên host HTTPS có header COOP/COEP. AI JS vẫn chơi được.');return false}
- if(!crossOriginIsolated){setAIStatus('🟠 Trình duyệt chưa được cô lập','Máy chủ HTTPS cần header Cross-Origin-Opener-Policy: same-origin và Cross-Origin-Embedder-Policy: require-corp. AI JS vẫn dùng được.');return false}
+ if(!crossOriginIsolated){setAIStatus('🔴 Cấu hình Netlify chưa được áp dụng','Thiếu COOP/COEP. Hãy triển khai toàn bộ nội dung thư mục NETLIFY_UPLOAD (gồm _headers ở thư mục gốc), sau đó tải lại trang bằng Ctrl+Shift+R. Không chỉ tải index.html.');return false}
  try{
   setAIStatus('🟡 Đang khởi tạo Pikafish…','Đang tải engine và mạng NNUE; lần đầu có thể tải khoảng 50 MB.');
   const assets=['worker.js','pikafish.js','pikafish.wasm','pikafish.nnue'];
@@ -242,7 +242,7 @@ function pickBotMove(b,s){
  // High / expert without Pikafish: strongest available JS search.
  return bestSearch(b,s,3).best;
 }
-async function queueBot(){if(botDifficulty()>=7&&!engineOnline){busy=false;setAIStatus('🔴 Mức 7–10 cần Pikafish', 'Hãy nhấn Nạp Pikafish và Kiểm tra AI. Các mức 7–10 không dùng AI JavaScript dự phòng.');display('Chưa thể đi ở mức 7','Pikafish chưa hoạt động. Hãy nạp engine; ván cờ được giữ nguyên.',null);return;}busy=true;setAIStatus('🟡 AI đang tính nước…','Chế độ đấu máy đang suy nghĩ.');const token=++requestToken;display('Máy đang suy nghĩ…','Đang tính toán nước đi.',null);
+async function queueBot(){if(botDifficulty()>=7&&!engineOnline){busy=false;setAIStatus('🔴 Mức 7–10 cần Pikafish', 'Hãy nhấn Nạp Pikafish và Kiểm tra AI. Các mức 7–10 không dùng AI JavaScript dự phòng.');display('Chưa thể đi ở mức '+botDifficulty(),'Pikafish chưa hoạt động. Hãy nạp engine; ván cờ được giữ nguyên.',null);return;}busy=true;setAIStatus('🟡 AI đang tính nước…','Chế độ đấu máy đang suy nghĩ.');const token=++requestToken;display('Máy đang suy nghĩ…','Đang tính toán nước đi.',null);
  try{let best=null;
  if(engineOnline&&botDifficulty()>=4){try{let r=await engineQuery(uciHistory,true);if(token!==requestToken)return;best=fromUci(r.bestmove,board);if(!best)throw Error('Pikafish trả nước đi không hợp lệ')}catch(e){stopPika(String(e.message||e));setAIStatus('🔴 Pikafish ngắt kết nối',String(e.message||e));if(botDifficulty()>=7){display('Mức cao đã tạm dừng','Pikafish lỗi. Nạp lại Pikafish để máy tiếp tục; không chuyển sang AI yếu.',null);return;}}}
  if(!best){if(botDifficulty()>=7){setAIStatus('🔴 Mức cao bị chặn','Chưa có nước đi hợp lệ từ Pikafish.');return;}best=pickBotMove(board,turn);}
@@ -250,7 +250,7 @@ async function queueBot(){if(botDifficulty()>=7&&!engineOnline){busy=false;setAI
  busy=false;if(best)await play(best,true);if(!engineOnline)setAIStatus('🟢 AI JavaScript: HOẠT ĐỘNG','Máy đã tính và đi xong một nước.');
  }finally{if(token===requestToken)busy=false}}
 
-document.getElementById('botLevel').addEventListener('change',()=>{const lv=botDifficulty();clearTimeout(botTimer);botTimer=null;requestToken++;cancelEngineTask('Đã đổi độ khó');busy=false;let note=lv===7?(!engineOnline?'Mức 7–10 bắt buộc Pikafish. Nhấn Nạp Pikafish rồi Kiểm tra AI. Máy sẽ không dùng JS dự phòng.':'Pikafish chuyên nghiệp; mức 8–10 ưu tiên thời gian tính toán để tránh treo điện thoại.'):lv>=5&&!engineOnline?'Pikafish chưa nạp: mức này có thể dùng AI JS dự phòng.':'Áp dụng từ nước máy tiếp theo.';display('Độ khó '+lv+'/10','Đã chọn '+document.getElementById('botLevel').selectedOptions[0].text+'. '+note,null);if(botMode&&!gameover&&turn!==human)scheduleBot()});
+document.getElementById('botLevel').addEventListener('change',()=>{const lv=botDifficulty();clearTimeout(botTimer);botTimer=null;requestToken++;cancelEngineTask('Đã đổi độ khó');busy=false;let note=lv>=7?(!engineOnline?'Mức 7–10 bắt buộc Pikafish. Nhấn Nạp Pikafish rồi Kiểm tra AI. Máy sẽ không dùng JS dự phòng.':'Pikafish chuyên nghiệp; mức 8–10 ưu tiên thời gian tính toán để tránh treo điện thoại.'):lv>=5&&!engineOnline?'Pikafish chưa nạp: mức này có thể dùng AI JS dự phòng.':'Áp dụng từ nước máy tiếp theo.';display('Độ khó '+lv+'/10','Đã chọn '+document.getElementById('botLevel').selectedOptions[0].text+'. '+note,null);if(botMode&&!gameover&&turn!==human)scheduleBot()});
 document.getElementById('strengthMode').addEventListener('change',()=>{const mode=document.getElementById('strengthMode').value;display('Chế độ AI',mode==='power'?'Ưu tiên sức mạnh: Pikafish có thêm thời gian suy nghĩ từ nước tiếp theo.':'Cân bằng: máy đi nhanh hơn.',null)});
 document.getElementById('bot').onclick=()=>{if(!confirmDiscard())return;botMode=!botMode;setup();if(botMode&&turn!==human){scheduleBot()}};
 document.getElementById('reset').onclick=()=>{if(!confirmDiscard())return;setup();if(botMode&&turn!==human){scheduleBot()}};document.getElementById('undo').onclick=()=>{requestToken++;busy=false;clearTimeout(botTimer);botTimer=null;cancelEngineTask('Hoàn tác');let old=undoStack.pop();if(!old)return;if(botMode&&old.turn!==human&&undoStack.length)old=undoStack.pop();board=old.board;turn=old.turn;records=old.records;last=old.last;uciHistory=old.uciHistory||[];requestToken++;gameover=false;document.getElementById('review').hidden=true;replayAt=null;practiceTarget=null;arrow=null;mistake=null;selected=null;legalTargets=[];render();display('Đã hoàn tác','Bạn có thể thử một nước đi khác để so sánh điểm và nhận xét.',null)};
@@ -259,7 +259,8 @@ if(engineOnline){display('AI đang phân tích','Đang tìm nước tốt nhất
 if(!best)best=bestSearch(board,turn).best;if(best){selected={x:best.x,y:best.y};legalTargets=[best];arrow={m:best,bad:false};mistake=null;render();display('Gợi ý: '+(engineOnline?'Pikafish':'AI JavaScript'),'Nên đi: '+notation(best)+'. Mũi tên xanh hiển thị nước gợi ý; điểm chỉ mang tính tham khảo.',null)}if(token===requestToken)busy=false;};
 document.getElementById('enginecheck').onclick=checkEngine;
 document.getElementById('loadpika').onclick=async()=>{await loadPika();if(pikaReady&&botMode&&botDifficulty()>=7&&!gameover&&turn!==human)scheduleBot()};
-setAIStatus('🟡 AI JavaScript: sẵn sàng kiểm tra','Bấm “Kiểm tra AI” để thử khả năng tính nước, chấm điểm và xác nhận trạng thái. Đây không phải Pikafish.');
+setAIStatus('🟡 AI JavaScript: sẵn sàng kiểm tra','Bấm “Kiểm tra AI” để thử; để dùng Pikafish nhấn Nạp Pikafish.');
+if(location.protocol!=='file:' && !crossOriginIsolated)setAIStatus('🔴 Website chưa bật COOP/COEP','Host chưa bật chế độ cách ly cho Pikafish. Cần triển khai kèm _headers trong thư mục gốc.');
 document.getElementById('toggle').onclick=()=>{if(!confirmDiscard())return;human=other(human);if(!botMode&&human==='b')botMode=true;setup();if(botMode&&turn!==human){scheduleBot()}render();display('Đổi bên chơi','Đã đổi bên ưu tiên thành '+(human==='r'?'Đỏ':'Đen')+'. Chế độ đấu máy sẽ tự động cho máy đi khi đến lượt.',null)};
 
 function confirmDiscard(){return !records.length||window.confirm('Ván đang chơi có '+records.length+' nước. Bạn đã lưu ván chưa? Chọn OK để tiếp tục và bỏ tiến trình hiện tại.')}
