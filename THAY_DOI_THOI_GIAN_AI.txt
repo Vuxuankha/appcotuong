@@ -1,0 +1,8 @@
+CỜ TƯỚNG AI - CẬP NHẬT THỜI GIAN SUY NGHĨ
+- Mức 7, 8, 9, 10: lệnh Pikafish `go movetime 30000` (mục tiêu 30 giây/nước).
+- Timeout ứng dụng 36 giây cho mức 7-10 để engine có thời gian phản hồi.
+- Mức 6: giữ 4,5 giây suy nghĩ, timeout 8,5 giây.
+- Mức 1-5: không đổi.
+- Đồng hồ hai bên vẫn tiếp tục chạy khi AI suy nghĩ, nên AI có thể hết giờ nếu đồng hồ còn ít.
+- Tốc độ thực tế phụ thuộc điện thoại, trình duyệt, việc nạp engine và trạng thái chạy nền.
+- Đã kiểm tra cú pháp JS; chưa chạy kiểm thử đầy đủ trong trình duyệt di động.
